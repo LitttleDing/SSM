@@ -50,5 +50,5 @@
     </bean>
 
 
-    <import resource="classpath:spring/*.xml"/>
+    <import resource="classpath:spring/spring_axis2.xml"/>
 </beans>  
