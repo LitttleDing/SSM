@@ -47,6 +47,8 @@
         <property name="dataSource" ref="dataSource2" />      
         <property name="configLocation" value="classpath:mybatis-dbtest-config.xml"/>
         <property name="mapperLocations" value="classpath:mapper2/*.xml"/>
-    </bean>  
-  
+    </bean>
+
+
+    <import resource="classpath:spring/*.xml"/>
 </beans>  
