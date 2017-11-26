@@ -13,10 +13,22 @@ $(function(){
         onMessage(event)
     };
 
+    webSocket.onclose = function(event){
+        onclose(event);
+    };
+
     $("#start").click(function(){
         webSocket.send("hello");
     });
+
+    $("#stop").click(function(){
+        webSocket.close();
+    });
 });
+
+function onclose(event){
+    $("#message").val("connection closed !");
+}
 
 function onMessage(event) {
     $("#message").val(event.data);
