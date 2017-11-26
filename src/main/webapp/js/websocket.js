@@ -23,7 +23,7 @@ function onMessage(event) {
 }
 
 function onOpen(event) {
-    $("#message").val("Hello ！");
+    $("#message").val("Hello ，connection ready !");
 }
 
 function onError(event) {
