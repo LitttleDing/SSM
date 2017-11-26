@@ -51,4 +51,5 @@
 
 
     <import resource="classpath:spring/spring_axis2.xml"/>
+    <!--<import resource="classpath:spring/spring_redis.xml"/>-->
 </beans>  

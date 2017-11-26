@@ -1,32 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
        xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <context:property-placeholder location="classpath:config.properties" />
-    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
-        <property name="maxTotal" value="${redis.master.maxTotal}" />
-        <property name="maxIdle" value="${redis.master.maxIdle}" />
-        <property name="minIdle" value="${redis.master.minIdle}" />
-        <property name="maxWaitMillis" value="${redis.master.maxWaitMillis}" />
-        <property name="testOnBorrow" value="${redis.master.testOnBorrow}" />
+    <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxIdle" value="300" />
+        <property name="maxTotal" value="600" />
+        <property name="maxWaitMillis" value="5000" />
+        <property name="testOnBorrow" value="true" />
     </bean>
 
     <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
-          p:host-name="server" p:port="6379" p:poolConfig-ref="jedisPoolConfig" p:usePool="true" />
+          p:host-name="127.0.0.1" p:port="6379"  p:pool-config-ref="poolConfig"/>
 
-    <!-- redis template definition -->
-    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"
-          p:connection-factory-ref="jedisConnectionFactory"/>
-
-    <bean id="messageListener" class="org.springframework.data.redis.listener.adapter.MessageListenerAdapter">
-        <constructor-arg>
-            <bean class="redisexample.DefaultMessageDelegate"/>
-        </constructor-arg>
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
+        <property name="connectionFactory"   ref="jedisConnectionFactory" />
     </bean>
+
+    <bean id="messageListener" class="com.db.redis.RedisMessageListener" />
 
     <bean id="redisContainer" class="org.springframework.data.redis.listener.RedisMessageListenerContainer">
         <property name="connectionFactory" ref="jedisConnectionFactory"/>

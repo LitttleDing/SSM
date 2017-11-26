@@ -21,4 +21,10 @@ public class Test {
     {
         return "test";
     }
+
+    @RequestMapping ( "/websocket" )
+    public String websocket(HttpServletRequest req)
+    {
+        return "websockettest";
+    }
 }
