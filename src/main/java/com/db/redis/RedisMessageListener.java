@@ -1,6 +1,5 @@
 package com.db.redis;
 
-import org.apache.axis2.databinding.types.xsd.String;
 import org.springframework.data.redis.connection.Message;
 import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
 

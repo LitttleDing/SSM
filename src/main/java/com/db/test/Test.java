@@ -16,10 +16,10 @@ public class Test {
         return "fuck this !";
     }
 
-    @RequestMapping ( "/page" )
-    public String page(HttpServletRequest req)
+    @RequestMapping ( "/index" )
+    public String index(HttpServletRequest req)
     {
-        return "test";
+        return "index";
     }
 
     @RequestMapping ( "/websocket" )
@@ -27,4 +27,6 @@ public class Test {
     {
         return "websockettest";
     }
+
+
 }
